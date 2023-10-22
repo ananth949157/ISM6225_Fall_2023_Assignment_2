@@ -3,6 +3,8 @@
 YOU ARE NOT ALLOWED TO MODIFY ANY FUNCTION DEFINATION's PROVIDED.
 WRITE YOUR CODE IN THE RESPECTIVE QUESTION FUNCTION BLOCK
 
+Name: Anantha Sai Ram Padala
+UID:U31331387
 
 */
 
@@ -117,6 +119,7 @@ namespace ISM6225_Fall_2023_Assignment_2
                 // Helper function to add a range to the result
                 Action<int, int> addRange = (start, end) =>
                 {
+                    // Check if the range is a single number or a range of numbers
                     if (start == end)
                     {
                         missingRanges.Add(new List<int> { start });
@@ -131,20 +134,21 @@ namespace ISM6225_Fall_2023_Assignment_2
                 {
                     if (i == 0 && nums[i] > lower)
                     {
-                        addRange(lower, nums[i] - 1);
+                        addRange(lower, nums[i] - 1); // There is a missing range before the first number in nums
                     }
                     else if (i > 0 && nums[i] - nums[i - 1] > 1)
                     {
-                        addRange(nums[i - 1] + 1, nums[i] - 1);
+                        addRange(nums[i - 1] + 1, nums[i] - 1); // There is a missing range between two consecutive numbers in nums
                     }
                 }
 
                 if (nums.Length == 0 || nums[nums.Length - 1] < upper)
                 {
                     addRange(nums.Length == 0 ? lower : nums[nums.Length - 1] + 1, upper);
+                    // There is a missing range after the last number in nums (or if nums is empty, check from lower to upper)
                 }
 
-                return missingRanges;
+                return missingRanges; // Return the list of missing ranges
             }
             catch (Exception)
             {
@@ -152,6 +156,13 @@ namespace ISM6225_Fall_2023_Assignment_2
             }
         }
 
+        /*
+
+        The above function effectively identifies and returns missing ranges in sorted lists,
+        teaching me the importance of concise code and the use of helper functions for readability.
+        I've learned how to handle edge cases in a systematic way while maintaining efficient time and space complexity.
+
+        */
 
 
         /*
@@ -188,37 +199,47 @@ namespace ISM6225_Fall_2023_Assignment_2
         {
             try
             {
-                Stack<char> stack = new Stack<char>();
+                Stack<char> stack = new Stack<char>(); // Initialize a stack to keep track of open brackets
 
                 foreach (char c in s)
                 {
                     if (c == '(' || c == '[' || c == '{')
                     {
-                        stack.Push(c);
+                        stack.Push(c); // If an open bracket is encountered, push it onto the stack
                     }
                     else
                     {
                         if (stack.Count == 0)
                         {
-                            return false;
+                            return false; // If a closing bracket is encountered, but the stack is empty, it's invalid
                         }
 
-                        char top = stack.Pop();
+                        char top = stack.Pop(); // Pop the top element from the stack
 
+                        // Check if the current closing bracket matches the last open bracket on the stack
                         if ((c == ')' && top != '(') || (c == ']' && top != '[') || (c == '}' && top != '{'))
                         {
-                            return false;
+                            return false; // If there's a mismatch, it's invalid
                         }
                     }
                 }
 
-                return stack.Count == 0;
+                return stack.Count == 0; // After processing all characters, the stack should be empty if it's valid
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        /*
+
+        I've learned how to efficiently validate bracket sequences using a stack data structure
+        in this code snippet. It handles edge cases, ensures correct ordering, and has a time complexity of O(n),
+        making it a practical solution for bracket validation.
+
+        */
+
 
         /*
 
@@ -269,6 +290,14 @@ namespace ISM6225_Fall_2023_Assignment_2
             }
         }
 
+        /*
+
+        Through this code I have learnt to efficiently compute the maximum profit from buying and selling a stock by maintaining the
+        minimum purchase price and updating the maximum profit as it traverses the price array.I have utilized a straightforward algorithm to track
+        the minimum price and the maximum profit as the code iterates through the price array,
+        ultimately providing a clear and optimized approach to solving the problem.
+
+        */
 
         /*
         
@@ -309,21 +338,21 @@ namespace ISM6225_Fall_2023_Assignment_2
             {'9', '6'}
         };
 
-                int left = 0;
-                int right = num.Length - 1;
+                int left = 0; // Initialize the left pointer to the beginning of the number
+                int right = num.Length - 1; // Initialize the right pointer to the end of the number
 
                 while (left <= right)
                 {
-                    char leftChar = num[left];
-                    char rightChar = num[right];
+                    char leftChar = num[left]; // Get the character at the left pointer
+                    char rightChar = num[right]; // Get the character at the right pointer
 
                     if (!strobogrammaticMap.ContainsKey(leftChar) || strobogrammaticMap[leftChar] != rightChar)
                     {
                         return false; // If the pair of characters is not strobogrammatic, return false
                     }
 
-                    left++;
-                    right--;
+                    left++; // Move the left pointer to the right
+                    right--; // Move the right pointer to the left
                 }
 
                 return true; // If the entire number is strobogrammatic, return true
@@ -333,6 +362,14 @@ namespace ISM6225_Fall_2023_Assignment_2
                 throw;
             }
         }
+
+        /*
+
+        My learnings from this code include the efficient use of a dictionary to represent mappings,
+        a two-pointer approach for string validation, and handling constraints effectively.
+        This code can swiftly identify strobogrammatic numbers in a simple and intuitive manner.
+
+        */
 
 
         /*
@@ -368,8 +405,8 @@ namespace ISM6225_Fall_2023_Assignment_2
         {
             try
             {
-                Dictionary<int, int> countMap = new Dictionary<int, int>();
-                int goodPairs = 0;
+                Dictionary<int, int> countMap = new Dictionary<int, int>(); // Initialize a dictionary to count occurrences of each number
+                int goodPairs = 0; // Initialize a count to track the number of good pairs
 
                 foreach (int num in nums)
                 {
@@ -390,17 +427,25 @@ namespace ISM6225_Fall_2023_Assignment_2
                 {
                     if (count > 1)
                     {
-                        goodPairs += count * (count - 1) / 2;
+                        goodPairs += count * (count - 1) / 2; // Increment the count of good pairs for each number
                     }
                 }
 
-                return goodPairs;
+                return goodPairs; // Return the total count of good pairs
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        /*
+
+        From this code, I've learned about using a dictionary to count occurrences and the formula for calculating good pairs,
+        which can be applied to similar counting problems.
+
+        */
+
 
         /*
         Question 6
@@ -447,30 +492,30 @@ namespace ISM6225_Fall_2023_Assignment_2
                 Array.Sort(nums);
                 Array.Reverse(nums);
 
-                int distinctCount = 0;
-                int? thirdMax = null;
-
+                int distinctCount = 0; // Initialize a count to track distinct maximum values
+                int? thirdMax = null; // Initialize a variable to store the third distinct maximum value. 
+                // The int? type allows the variable to hold either an integer value or a null value, indicating that the variable can be assigned an integer or set to null
                 for (int i = 0; i < nums.Length; i++)
                 {
                     if (i == 0 || nums[i] != nums[i - 1])
                     {
-                        distinctCount++;
+                        distinctCount++; // If a distinct value is encountered, increment the count
                     }
 
                     if (distinctCount == 3)
                     {
-                        thirdMax = nums[i];
-                        break;
+                        thirdMax = nums[i]; // When the third distinct maximum is found, store it
+                        break; // Exit the loop, as we found the third distinct maximum
                     }
                 }
 
                 if (thirdMax.HasValue)
                 {
-                    return thirdMax.Value;
+                    return thirdMax.Value; // If the third maximum exists, return it
                 }
                 else
                 {
-                    return nums[0]; // Return the maximum if the third maximum does not exist
+                    return nums[0]; // If the third maximum does not exist, return the maximum value in the array
                 }
             }
             catch (Exception)
@@ -479,6 +524,12 @@ namespace ISM6225_Fall_2023_Assignment_2
             }
         }
 
+        /*
+
+        From this code, I've learned how to handle scenarios where the third maximum number may not
+        exist in the array and how to utilize nullable types to accommodate such cases.
+
+        */
 
         /*
         
@@ -504,26 +555,36 @@ namespace ISM6225_Fall_2023_Assignment_2
         {
             try
             {
-                List<string> nextMoves = new List<string>();
+                List<string> nextMoves = new List<string>(); // Initializes a list to store possible next moves
 
                 for (int i = 0; i < currentState.Length - 1; i++)
                 {
+                    // Checks if the current position and the next position both contain a '+' character
                     if (currentState[i] == '+' && currentState[i + 1] == '+')
                     {
+                        // Creates a StringBuilder to represent the next move based on the current state
                         StringBuilder nextMove = new StringBuilder(currentState);
-                        nextMove[i] = '-';
-                        nextMove[i + 1] = '-';
-                        nextMoves.Add(nextMove.ToString());
+                        nextMove[i] = '-'; // Replaces the '+' at the current position with '-'
+                        nextMove[i + 1] = '-'; // Replaces the '+' at the next position with '-'
+                        nextMoves.Add(nextMove.ToString()); // Adds the next move to the list of possible moves
                     }
                 }
 
-                return nextMoves;
+                return nextMoves; // Returns the list of possible next moves
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        /*
+
+        From this code, I've learned the importance of using a StringBuilder to manipulate strings
+        and efficiently generate all valid moves in a game.
+
+        */
+
 
         /*
 
@@ -545,20 +606,28 @@ namespace ISM6225_Fall_2023_Assignment_2
 
         public static string RemoveVowels(string s)
         {
-            StringBuilder result = new StringBuilder();
+            StringBuilder result = new StringBuilder(); // Initialize a StringBuilder to build the result string
 
             foreach (char c in s)
             {
+                // Checks if the current character is not a vowel (both lowercase and uppercase)
                 if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u' &&
                     c != 'A' && c != 'E' && c != 'I' && c != 'O' && c != 'U')
                 {
-                    result.Append(c);
+                    result.Append(c); // If it's not a vowel, appends it to the result StringBuilder
                 }
             }
 
-            return result.ToString();
+            return result.ToString(); // Converts the StringBuilder to a string and return the result
         }
 
+        /*
+
+        From this code, I've learned an effective approach to filter out specific
+        characters from a string and build a resulting string
+
+        */
+         
 
         /* Inbuilt Functions - Don't Change the below functions */
         static string ConvertIListToNestedList(IList<IList<int>> input)
